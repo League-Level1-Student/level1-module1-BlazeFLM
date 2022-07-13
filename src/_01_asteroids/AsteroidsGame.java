@@ -23,8 +23,8 @@ public class AsteroidsGame implements GameScene, ActionListener {
 	/*
 	 * However if you tried running this you'll notice that we get a message popping
 	 * up saying you need to write a constructor. This is because if we let it run
-	 * we would get a null pointer exception since the rocket's collision box wouldn't be
-	 * initialized by the default constructor and would have no value.
+	 * we would get a null pointer exception since the rocket's collision box
+	 * wouldn't be initialized by the default constructor and would have no value.
 	 */
 
 	public static final int WIDTH = 800;
