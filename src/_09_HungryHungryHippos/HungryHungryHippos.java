@@ -42,148 +42,155 @@ import game_tools.GameScene;
  *    d. Make your hippos eat when a key is pressed.
  */
 public class HungryHungryHippos implements GameScene, GameControlScene {
-    static final int GAME_WIDTH = 800;
-    static final int GAME_HEIGHT = 800;
-    static final int GAME_BOARD_WIDTH = (2 * GAME_WIDTH) / 3;
-    static final int GAME_BOARD_X = -10 +(GAME_WIDTH - GAME_BOARD_WIDTH) / 2;
-    static final int GAME_BOARD_Y = 5 + GAME_BOARD_X;
-    static final int NUM_MELONS = 150;
+	static final int GAME_WIDTH = 800;
+	static final int GAME_HEIGHT = 800;
+	static final int GAME_BOARD_WIDTH = (2 * GAME_WIDTH) / 3;
+	static final int GAME_BOARD_X = -10 + (GAME_WIDTH - GAME_BOARD_WIDTH) / 2;
+	static final int GAME_BOARD_Y = 5 + GAME_BOARD_X;
+	static final int NUM_MELONS = 150;
 
-    /*
-     * Member variables
-     */
-    Color bgColor = new Color(100, 150, 50);
-    Color boardColor = new Color(138, 198, 193);
-    Game gameFrame = new Game("Hungry Hungry Hippos");
-    boolean startGame = false;
+	/*
+	 * Member variables
+	 */
+	Color bgColor = new Color(100, 150, 50);
+	Color boardColor = new Color(138, 198, 193);
+	Game gameFrame = new Game("Hungry Hungry Hippos");
+	boolean startGame = false;
 
-    /*
-     * Create your hippo objects here. The "left" input parameter indicates
-     * which side the hippo is drawn.
-     */
-    Hippo myHippoObject = new Hippo("left");
+	/*
+	 * Create your hippo objects here. The "left" input parameter indicates which
+	 * side the hippo is drawn.
+	 */
+	Hippo LizzieHippo = new Hippo("left", "Lizzie Hippo", new Color(160, 32, 240));
+	Hippo HenryHippo = new Hippo("top", "Henry Hippo", Color.gray);
+	Hippo HomerHippo = new Hippo("right", "Homer Hippo", Color.green);
+	Hippo HarryHippo = new Hippo("bottom", "Harry Hippo", Color.yellow);
 
-    public HungryHungryHippos() {
-        gameFrame.setScene(this);
-        gameFrame.start();
-        gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT);
-        setup();
-        
-        String instructions = "Press '1' to make the hippo eat\n";
-        instructions += "Press 's' to start";
-        JOptionPane.showMessageDialog(null, instructions);
-    }
+	public HungryHungryHippos() {
+		gameFrame.setScene(this);
+		gameFrame.start();
+		gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT);
+		setup();
 
-    @Override
-    public void draw(Graphics g) {
-        /*
-         * Background
-         */
-        g.setColor(bgColor);
-        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		String instructions = "Press '1' to make the hippo eat\n";
+		instructions += "Press 's' to start";
+		JOptionPane.showMessageDialog(null, instructions);
+	}
 
-        /*
-         * Circular game table
-         */
-        g.setColor(boardColor);
-        g.fillOval(GAME_BOARD_X, GAME_BOARD_Y, GAME_BOARD_WIDTH, GAME_BOARD_WIDTH);
+	@Override
+	public void draw(Graphics g) {
+		/*
+		 * Background
+		 */
+		g.setColor(bgColor);
+		g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-        /*
-         * Draw all the melons
-         */
-        drawMelons(g);
+		/*
+		 * Circular game table
+		 */
+		g.setColor(boardColor);
+		g.fillOval(GAME_BOARD_X, GAME_BOARD_Y, GAME_BOARD_WIDTH, GAME_BOARD_WIDTH);
 
-        /*
-         * Draw all the hippos here
-         */
-        myHippoObject.draw(g);
-        
-        if (startGame) {
-            /*
-             * Move all the melons
-             */
-            updateMelons();
-            
-            /*
-             * Check if a hippo is eating a melon by calling the
-             * checkHippoEating(myHippoObject) method. Make sure to do
-             * this for all of your hippos!
-             */
-            checkHippoEating(myHippoObject);
-        }
-    }
+		/*
+		 * Draw all the melons
+		 */
+		drawMelons(g);
 
-    @Override
-    public void keyPressed(KeyEvent event) {
-        int keyCode = event.getKeyCode();
+		/*
+		 * Draw all the hippos here
+		 */
+		LizzieHippo.draw(g);
+		HenryHippo.draw(g);
+		HomerHippo.draw(g);
+		HarryHippo.draw(g);
 
-        /*
-         * Bind a key to make your hippos eat
-         */
-        if (keyCode == KeyEvent.VK_S) {
-            startGame = true;
-        } else if (keyCode == KeyEvent.VK_1) {
-            myHippoObject.eat();
-        } else if (keyCode == KeyEvent.VK_2) {
-            
-        } else if (keyCode == KeyEvent.VK_3) {
-            
-        } else if (keyCode == KeyEvent.VK_4) {
-            
-        }
-    }
-    
-    
-    
-    /*
-     * ====================== DO NOT EDIT THE CODE BELOW ======================
-     */
-    
-    ArrayList<Melon> melons;
+		if (startGame) {
+			/*
+			 * Move all the melons
+			 */
+			updateMelons();
 
-    public void setup() {
-        melons = new ArrayList<>();
+			/*
+			 * Check if a hippo is eating a melon by calling the
+			 * checkHippoEating(LizzieHippo) method. Make sure to do this for all of your
+			 * hippos!
+			 */
+			checkHippoEating(LizzieHippo);
+			checkHippoEating(HenryHippo);
+			checkHippoEating(HomerHippo);
+			checkHippoEating(HarryHippo);
+		}
+	}
 
-        int gameCenterX = HungryHungryHippos.GAME_BOARD_X + (HungryHungryHippos.GAME_BOARD_WIDTH / 2);
-        int gameCenterY = HungryHungryHippos.GAME_BOARD_Y + (HungryHungryHippos.GAME_BOARD_WIDTH / 2);
-        Random rand = new Random();
+	@Override
+	public void keyPressed(KeyEvent event) {
+		int keyCode = event.getKeyCode();
 
-        for (int i = 0; i < NUM_MELONS; i++) {
-            int x = gameCenterX + Melon.RADIUS + 30 - rand.nextInt(60);
-            int y = gameCenterY + Melon.RADIUS + 30 - rand.nextInt(60);
-            melons.add(new Melon(x, y));
-        }
-    }
+		/*
+		 * Bind a key to make your hippos eat
+		 */
+		if (keyCode == KeyEvent.VK_S) {
+			startGame = true;
+		} else if (keyCode == KeyEvent.VK_1) {
+			LizzieHippo.eat();
+		} else if (keyCode == KeyEvent.VK_2) {
 
-    public void addMelon() {
-        melons.add(new Melon(GAME_WIDTH / 2, GAME_HEIGHT / 2));
-    }
+		} else if (keyCode == KeyEvent.VK_3) {
 
-    public void drawMelons(Graphics g) {
-        if (melons != null) {
-            for (Melon melon : melons) {
-                melon.draw(g);
-            }
-        }
-    }
+		} else if (keyCode == KeyEvent.VK_4) {
 
-    public void updateMelons() {
-        for (Melon melon : melons) {
-            melon.update();
-        }
-    }
+		}
+	}
 
-    public void checkHippoEating(Hippo hippo) {
-        if (hippo.isEating) {
-            Iterator<Melon> melonIterator = melons.iterator();
+	/*
+	 * ====================== DO NOT EDIT THE CODE BELOW ======================
+	 */
 
-            while (melonIterator.hasNext()) {
-                Melon melon = melonIterator.next();
-                if (hippo.collisionBox.intersects(melon.collisionBox)) {
-                    hippo.melonsEaten++;
-                    melonIterator.remove();
-                }
-            }
-        }
-    }
+	ArrayList<Melon> melons;
+
+	public void setup() {
+		melons = new ArrayList<>();
+
+		int gameCenterX = HungryHungryHippos.GAME_BOARD_X + (HungryHungryHippos.GAME_BOARD_WIDTH / 2);
+		int gameCenterY = HungryHungryHippos.GAME_BOARD_Y + (HungryHungryHippos.GAME_BOARD_WIDTH / 2);
+		Random rand = new Random();
+
+		for (int i = 0; i < NUM_MELONS; i++) {
+			int x = gameCenterX + Melon.RADIUS + 30 - rand.nextInt(60);
+			int y = gameCenterY + Melon.RADIUS + 30 - rand.nextInt(60);
+			melons.add(new Melon(x, y));
+		}
+	}
+
+	public void addMelon() {
+		melons.add(new Melon(GAME_WIDTH / 2, GAME_HEIGHT / 2));
+	}
+
+	public void drawMelons(Graphics g) {
+		if (melons != null) {
+			for (Melon melon : melons) {
+				melon.draw(g);
+			}
+		}
+	}
+
+	public void updateMelons() {
+		for (Melon melon : melons) {
+			melon.update();
+		}
+	}
+
+	public void checkHippoEating(Hippo hippo) {
+		if (hippo.isEating) {
+			Iterator<Melon> melonIterator = melons.iterator();
+
+			while (melonIterator.hasNext()) {
+				Melon melon = melonIterator.next();
+				if (hippo.collisionBox.intersects(melon.collisionBox)) {
+					hippo.melonsEaten++;
+					melonIterator.remove();
+				}
+			}
+		}
+	}
 }
