@@ -62,9 +62,9 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
 	 * side the hippo is drawn.
 	 */
 	Hippo LizzieHippo = new Hippo("left", "Lizzie Hippo", new Color(160, 32, 240));
-	Hippo HenryHippo = new Hippo("top", "Henry Hippo", Color.gray);
+	Hippo HenryHippo = new Hippo("up", "Henry Hippo", Color.gray);
 	Hippo HomerHippo = new Hippo("right", "Homer Hippo", Color.green);
-	Hippo HarryHippo = new Hippo("bottom", "Harry Hippo", Color.yellow);
+	Hippo HarryHippo = new Hippo("down", "Harry Hippo", Color.yellow);
 
 	public HungryHungryHippos() {
 		gameFrame.setScene(this);
@@ -134,11 +134,11 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
 		} else if (keyCode == KeyEvent.VK_1) {
 			LizzieHippo.eat();
 		} else if (keyCode == KeyEvent.VK_2) {
-
+			HomerHippo.eat();
 		} else if (keyCode == KeyEvent.VK_3) {
-
+			HarryHippo.eat();
 		} else if (keyCode == KeyEvent.VK_4) {
-
+			HenryHippo.eat();
 		}
 	}
 

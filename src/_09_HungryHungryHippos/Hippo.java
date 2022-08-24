@@ -1,4 +1,4 @@
-package _09_HungryHungryHippos;
+ package _09_HungryHungryHippos;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,7 +20,8 @@ public class Hippo {
 	 */
 	public Hippo(String location, String name, Color color) {
 		this.location = location;
-
+		this.name = name;
+		this.color = color;
 		setupPosition();
 	}
 
@@ -28,9 +29,8 @@ public class Hippo {
 		/*
 		 * Local variables
 		 */
-		Color bodyColor = Color.GRAY;
-		String hippoName = "Hippie Hippo";
-
+		Color bodyColor = color;
+		String hippoName = name;
 		drawScore(g, hippoName);
 
 		// Body
